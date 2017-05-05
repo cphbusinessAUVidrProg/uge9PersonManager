@@ -29,7 +29,7 @@ namespace uge9opgaver
     }
 
     class PersonManager : IPersonManager{
-        private static PersonManager instance;
+        protected static PersonManager instance;
         public static PersonManager Instance(){
             if (instance == null) instance = new PersonManager();
             return instance;
@@ -58,6 +58,11 @@ namespace uge9opgaver
         }
     }
     class CPHPersonManager : PersonManager{
+		public new static PersonManager Instance()
+		{
+			if (instance == null) instance = new CPHPersonManager();
+			return instance;
+		}
         public override Person createPerson(string name, string email, int phone){
             if (!email.Contains("@cphbusiness.dk"))
                 throw new ArgumentException();
